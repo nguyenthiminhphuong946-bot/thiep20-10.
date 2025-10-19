@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chúc Mừng 20-10 💖</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(to bottom right, #ffe6f2, #ffb3d9);
+      font-family: "Comic Sans MS", cursive;
+      color: #c70039;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(36px, 7vw, 70px);
+      text-shadow: 2px 2px 8px white;
+      animation: pulse 2s infinite;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    h2 {
+      font-size: clamp(20px, 4vw, 32px);
+      color: #ff0066;
+      text-shadow: 1px 1px 6px white;
+      margin-top: 12px;
+    }
+
+    /* Trái tim */
+    .heart {
+      width: clamp(40px, 8vw, 60px);
+      height: clamp(40px, 8vw, 60px);
+      background-color: red;
+      transform: rotate(-45deg);
+      position: relative;
+      animation: beat 1s infinite;
+    }
+
+    .heart::before, .heart::after {
+      content: "";
+      position: absolute;
+      width: inherit;
+      height: inherit;
+      background-color: red;
+      border-radius: 50%;
+    }
+    .heart::before { top: -50%; left: 0; }
+    .heart::after { top: 0; left: 50%; }
+
+    /* Hoa hồng hai bên */
+    .rose {
+      position: absolute;
+      width: clamp(80px, 15vw, 130px);
+      height: clamp(80px, 15vw, 130px);
+      background: radial-gradient(circle at 20px 20px, #ff6699, #cc0066);
+      border-radius: 50%;
+      box-shadow: 0 0 30px #ff99cc;
+      transform: scale(0);
+      animation: bloom 3s forwards;
+    }
+
+    .rose.left { left: 10%; bottom: 20%; animation-delay: 1s; }
+    .rose.right { right: 10%; bottom: 20%; animation-delay: 1.5s; }
+
+    /* Bong bóng trái tim */
+    .bubble {
+      position: absolute;
+      bottom: 0;
+      width: 30px;
+      height: 30px;
+      background-color: rgba(255, 0, 102, 0.4);
+      border-radius: 50%;
+      animation: floatUp 6s linear infinite;
+    }
+
+    /* QR */
+    #qr {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      width: 90px;
+      height: 90px;
+      background: white;
+      border-radius: 10px;
+      padding: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: rotate(-45deg) scale(1); }
+      50% { transform: rotate(-45deg) scale(1.2); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { text-shadow: 0 0 10px white; }
+      50% { text-shadow: 0 0 30px #ff99cc; }
+    }
+
+    @keyframes bloom {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1.2); opacity: 1; }
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-800px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>💐 20 - 10 💐 <span class="heart"></span></h1>
+  <h2>Chúc bạn luôn xinh đẹp và dễ thương 💕</h2>
+
+  <div class="rose left"></div>
+  <div class="rose right"></div>
+  <canvas id="qr"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script>
+    // Bong bóng
+    for (let i = 0; i < 25; i++) {
+      const b = document.createElement("div");
+      b.className = "bubble";
+      b.style.left = Math.random() * 100 + "%";
+      b.style.animationDuration = 4 + Math.random() * 4 + "s";
+      b.style.width = b.style.height = 10 + Math.random() * 25 + "px";
+      document.body.appendChild(b);
+    }
+
+    // QR hiển thị link web hiện tại
+    QRCode.toCanvas(document.getElementById("qr"), window.location.href, { width: 128 });
+  </script>
+</body>
+</html>
